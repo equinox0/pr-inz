@@ -1,0 +1,17 @@
+{
+  "name": "pr-inz",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "equinox0 <filip.kurzawa@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/equinox0/pr-inz",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
