@@ -1,17 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="app">
 <head>
   <meta charset="utf-8">
 
   <title>Pr inz</title>
 
-  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="./app/components/command_kit/command_kit.css">
+  <link rel="stylesheet" href="./app/components/editor_workspace/editor_workspace.css">
+  <link rel="stylesheet" href="./app/components/visualisation/visualisation.css">
 </head>
 
 <body>
+  <app></app>
 
-  <script src="bower_components/jquery/dist/jquery.min.js"></script>
-  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="bower_components/angular/angular.min.js"></script>
+  <script src="./bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="./bower_components/angular/angular.min.js"></script>
+  <script src="./bower_components/phaser/build/phaser.js"></script>
+
+  <script src="./app/app.module.js"></script>
+  <script src="./app/app.component.js"></script>
+  <script src="./app/app.controller.js"></script>
+
+  <script src="./app/shared/navbar/navbar.module.js"></script>
+  <script src="./app/shared/navbar/navbar.component.js"></script>
+  <script src="./app/shared/navbar/navbar.controller.js"></script>
+
+  <script src="./app/components/command_kit/command_kit.module.js"></script>
+  <script src="./app/components/command_kit/command_kit.component.js"></script>
+  <script src="./app/components/command_kit/command_kit.controller.js"></script>
+
+  <script src="./app/components/editor_workspace/editor_workspace.module.js"></script>
+  <script src="./app/components/editor_workspace/editor_workspace.component.js"></script>
+  <script src="./app/components/editor_workspace/editor_workspace.controller.js"></script>
+
+  <script src="./app/components/visualisation/visualisation.module.js"></script>
+  <script src="./app/components/visualisation/visualisation.component.js"></script>
+  <script src="./app/components/visualisation/visualisation.controller.js"></script>
 </body>
 </html>

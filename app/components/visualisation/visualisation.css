@@ -1,0 +1,9 @@
+#visualisation-column {
+  width: 375px;
+  height: 375px;
+  margin: 0;
+  padding: 1px;
+  background-color: rgb(159, 166, 162);
+  border: rgb(159, 166, 162) inset 6px;
+  border-radius: 3px;
+}

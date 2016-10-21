@@ -1,0 +1,9 @@
+#command-kit-column {
+  width: 100%;
+  height: calc(100vh * 0.8);
+  margin: 0;
+  padding: 0;
+  background-color: rgb(35, 200, 99);
+  border: rgb(35, 200, 99) inset 6px;
+  border-radius: 3px;
+}
