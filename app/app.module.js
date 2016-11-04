@@ -1,1 +1,1 @@
-angular.module('app', ['navbar', 'commandKit', 'editorWorkspace', 'visualisation']);
+angular.module('app', ['navbar', 'commandKit', 'editorWorkspace', 'visualisation', 'codeBlock']);

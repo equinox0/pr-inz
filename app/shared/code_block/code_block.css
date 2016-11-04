@@ -1,0 +1,15 @@
+.code-block {
+  display: inline-block;
+  margin-top: 10px;
+  margin-left: 10px;
+  padding: 5px 10px 5px 10px;
+  border: solid 2px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.function-block {
+  background-color: rgb(113, 199, 201);
+  border-color: rgb(10, 36, 84);
+  color: rgb(10, 36, 84);
+}

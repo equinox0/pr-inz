@@ -1,21 +1,24 @@
 angular.module('visualisation')
   .controller('VisualisationController', VisualisationController);
 
-VisualisationController.$inject = [];
+VisualisationController.$inject = ['VisualisationService'];
 
-function VisualisationController() {
-  var game = new Phaser.Game(360, 360, Phaser.AUTO, 'visualisation-column', {
-    preload: preload,
-    create: create, update:
-    update
-  });
+function VisualisationController(VisualisationService) {
+  var vm = this;
 
-  function preload() {
+  var game = null;
+
+  vm.startVisualisation = startVisualisation;
+
+  vm.$onInit = function() {
+    new Phaser.Game(320, 320, Phaser.AUTO, 'visualisation-column', {
+     preload: VisualisationService.preload,
+     create: VisualisationService.create,
+     update: VisualisationService.update
+    });
   }
 
-  function create() {
-  }
-
-  function update() {
+  function startVisualisation() {
+    console.log('TODO: Start Visualisation');
   }
 }

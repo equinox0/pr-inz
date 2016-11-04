@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="10" height="10" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="terrain" tilewidth="32" tileheight="32" tilecount="483" columns="21">
+  <image source="terrain.png" width="672" height="736"/>
+ </tileset>
+ <layer name="Ground" width="10" height="10">
+  <data encoding="csv">
+260,344,344,344,344,344,344,344,344,261,
+324,191,191,191,191,233,191,191,191,322,
+324,191,232,191,191,191,191,237,191,322,
+324,191,191,191,233,191,191,191,191,322,
+324,191,233,191,191,191,191,191,191,322,
+324,191,191,191,191,191,191,232,191,322,
+324,233,235,234,191,236,191,191,191,322,
+324,191,191,191,191,191,234,191,194,322,
+324,191,191,232,191,191,191,191,234,322,
+281,302,302,302,302,302,302,302,302,282
+</data>
+ </layer>
+</map>
