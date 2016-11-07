@@ -7,9 +7,9 @@
 
   <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.min.css">
 
-  <link rel="stylesheet" href="./app/components/command_kit/command_kit.css">
-  <link rel="stylesheet" href="./app/components/editor_workspace/editor_workspace.css">
-  <link rel="stylesheet" href="./app/components/visualisation/visualisation.css">
+  <link rel="stylesheet" href="./app/components/game/command_kit/command_kit.css">
+  <link rel="stylesheet" href="./app/components/game/editor_workspace/editor_workspace.css">
+  <link rel="stylesheet" href="./app/components/game/visualisation/visualisation.css">
   <link rel="stylesheet" href="./app/shared/code_block/code_block.css">
 </head>
 
@@ -19,9 +19,11 @@
   <script src="./bower_components/jquery/dist/jquery.min.js"></script>
   <script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="./bower_components/angular/angular.min.js"></script>
+  <script src="./bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
   <script src="./bower_components/phaser/build/phaser.js"></script>
 
   <script src="./app/app.module.js"></script>
+  <script src="./app/app.routes.js"></script>
   <script src="./app/app.component.js"></script>
   <script src="./app/app.controller.js"></script>
   <script src="./app/app.service.js"></script>
@@ -34,17 +36,15 @@
   <script src="./app/shared/code_block/code_block.component.js"></script>
   <script src="./app/shared/code_block/code_block.controller.js"></script>
 
-  <script src="./app/components/command_kit/command_kit.module.js"></script>
-  <script src="./app/components/command_kit/command_kit.component.js"></script>
-  <script src="./app/components/command_kit/command_kit.controller.js"></script>
-
-  <script src="./app/components/editor_workspace/editor_workspace.module.js"></script>
-  <script src="./app/components/editor_workspace/editor_workspace.component.js"></script>
-  <script src="./app/components/editor_workspace/editor_workspace.controller.js"></script>
-
-  <script src="./app/components/visualisation/visualisation.module.js"></script>
-  <script src="./app/components/visualisation/visualisation.component.js"></script>
-  <script src="./app/components/visualisation/visualisation.controller.js"></script>
-  <script src="./app/components/visualisation/visualisation.service.js"></script>
+  <script src="./app/components/game/game.module.js"></script>
+  <script src="./app/components/game/game.component.js"></script>
+  <script src="./app/components/game/game.controller.js"></script>
+  <script src="./app/components/game/command_kit/command_kit.component.js"></script>
+  <script src="./app/components/game/command_kit/command_kit.controller.js"></script>
+  <script src="./app/components/game/editor_workspace/editor_workspace.component.js"></script>
+  <script src="./app/components/game/editor_workspace/editor_workspace.controller.js"></script>
+  <script src="./app/components/game/visualisation/visualisation.component.js"></script>
+  <script src="./app/components/game/visualisation/visualisation.controller.js"></script>
+  <script src="./app/components/game/visualisation/visualisation.service.js"></script>
 </body>
 </html>

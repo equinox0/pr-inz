@@ -1,4 +1,4 @@
-angular.module('editorWorkspace')
+angular.module('game')
   .controller('EditorWorkspaceController', EditorWorkspaceController);
 
 EditorWorkspaceController.$inject = [];

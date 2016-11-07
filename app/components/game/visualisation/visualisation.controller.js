@@ -1,4 +1,4 @@
-angular.module('visualisation')
+angular.module('game')
   .controller('VisualisationController', VisualisationController);
 
 VisualisationController.$inject = ['VisualisationService'];

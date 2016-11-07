@@ -1,6 +1,6 @@
-angular.module('commandKit')
+angular.module('game')
   .component('commandKit', {
-    templateUrl: './app/components/command_kit/command_kit.template.html',
+    templateUrl: './app/components/game/command_kit/command_kit.template.html',
     controller: 'CommandKitController',
     bindings: {
       blocks: '<'

@@ -1,4 +1,4 @@
-angular.module('commandKit')
+angular.module('game')
   .controller('CommandKitController', CommandKitController);
 
 CommandKitController.$inject = [];

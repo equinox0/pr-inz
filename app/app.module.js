@@ -1,1 +1,3 @@
-angular.module('app', ['navbar', 'commandKit', 'editorWorkspace', 'visualisation', 'codeBlock']);
+angular.module('app',
+  ['game', 'navbar', 'codeBlock',
+  'ui.router']);

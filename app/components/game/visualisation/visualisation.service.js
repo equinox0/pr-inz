@@ -1,4 +1,4 @@
-angular.module('visualisation')
+angular.module('game')
   .factory('VisualisationService', VisualisationService);
 
 VisualisationService.$inject = ['TILE_SIZE'];
@@ -10,14 +10,14 @@ function VisualisationService(TILE_SIZE) {
 
   function preload() {
     // Loads map
-    this.load.tilemap('map', './app/components/visualisation/assets/base_map.json', null, Phaser.Tilemap.TILED_JSON);
-    this.load.image('terrain', './app/components/visualisation/assets/terrain.png');
+    this.load.tilemap('map', './app/components/game/visualisation/assets/base_map.json', null, Phaser.Tilemap.TILED_JSON);
+    this.load.image('terrain', './app/components/game/visualisation/assets/terrain.png');
 
     // Loads coin sprite
-    this.load.spritesheet('coin', './app/components/visualisation/assets/coin_gold.png', 32, 32);
+    this.load.spritesheet('coin', './app/components/game/visualisation/assets/coin_gold.png', TILE_SIZE, TILE_SIZE);
 
     // Loads character sprite
-    this.load.spritesheet('player', './app/components/visualisation/assets/car.png');
+    this.load.spritesheet('player', './app/components/game/visualisation/assets/car.png');
   }
 
   function create() {
