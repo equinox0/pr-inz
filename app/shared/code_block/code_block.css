@@ -13,3 +13,15 @@
   border-color: rgb(10, 36, 84);
   color: rgb(10, 36, 84);
 }
+
+.loop-block {
+  background-color: rgb(252, 110, 110);
+  border-color: rgb(102, 23, 23);
+  color: rgb(102, 23, 23);
+}
+
+.condition-block {
+  background-color: rgb(163, 87, 142);
+  border-color: rgb(63, 10, 84);
+  color: rgb(63, 10, 84);
+}
