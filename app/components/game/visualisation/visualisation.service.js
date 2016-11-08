@@ -5,8 +5,14 @@ VisualisationService.$inject = ['TILE_SIZE'];
 
 function VisualisationService(TILE_SIZE) {
 
-  var player = null;
-  var coin = null;
+  var _player = null;
+  var _coin = null;
+
+  var _initData = null;
+
+  function setInitData(data) {
+    _initData = data;
+  }
 
   function preload() {
     // Loads map
@@ -26,24 +32,44 @@ function VisualisationService(TILE_SIZE) {
 
     this.layer = this.map.createLayer('Ground');
 
-    coin = this.add.sprite(_countPositionOfTile(1), _countPositionOfTile(1), 'coin', 0);
-    coin.anchor.set(0.5);
-    coin.animations.add('rotate', null, 15, true);
-    coin.play('rotate');
+    _coin = this.add.sprite(_countPositionOfTile(_initData.coinPosition.x),
+                            _countPositionOfTile(_initData.coinPosition.y),
+                            'coin', 0);
+    _coin.anchor.set(0.5);
+    _coin.animations.add('rotate', null, 15, true);
+    _coin.play('rotate');
 
-    player = this.add.sprite(_countPositionOfTile(1), _countPositionOfTile(2), 'player');
-    player.anchor.set(0.5);
+    _player = this.add.sprite(_countPositionOfTile(_initData.playerStartPosition.x),
+                              _countPositionOfTile(_initData.playerStartPosition.y),
+                              'player');
+    _player.anchor.set(0.5);
+    _player.angle = _getAngleOfTurn(_initData.playerStartTurn);
   }
 
   function update() {
-      player.angle += 1;
+      // TODO: !
   }
 
   function _countPositionOfTile(n) {
     return (n * TILE_SIZE) + TILE_SIZE / 2;
   }
 
+  function _getAngleOfTurn(turn) {
+    switch(turn) {
+      case 'left':
+        return 270;
+      case 'down':
+        return 180;
+      case 'right':
+        return 90;
+      case 'up':
+      default:
+        return 0;
+    }
+  }
+
   return {
+    setInitData: setInitData,
     preload: preload,
     create: create,
     update: update

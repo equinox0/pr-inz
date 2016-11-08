@@ -1,10 +1,10 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-4">
-      <visualisation></visualistion>
+      <visualisation init-data="$ctrl.currentLevelData.visualisationData"></visualistion>
     </div>
     <div class="col-xs-2">
-      <command-kit blocks="$ctrl.level.blocks"></command-kit>
+      <command-kit blocks="$ctrl.currentLevelData.blocks"></command-kit>
     </div>
     <div class="col-xs-6">
       <editor-workspace></editor-workspace>

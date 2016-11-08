@@ -1,12 +1,20 @@
 angular.module('game')
   .controller('GameController', GameController);
 
-GameController.$inject = ['$stateParams'];
+GameController.$inject = ['$stateParams', 'AppService', '$state'];
 
-function GameController($stateParams) {
+function GameController($stateParams, AppService, $state) {
   var vm = this;
 
-  vm.currentLevel = $stateParams.levelId;
+  vm.currentLevel = null;
+  vm.currentLevelData = null;
 
-  console.log('current level: ', vm.currentLevel);
+  vm.$onInit = function() {
+    vm.currentLevel = $stateParams.levelId;
+
+    vm.currentLevelData = AppService.getLevel(vm.currentLevel);
+    if(!vm.currentLevelData) {
+      $state.go('main');
+    }
+  }
 }

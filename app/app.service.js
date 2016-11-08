@@ -60,8 +60,9 @@ function AppService() {
   ];
 
   function getLevel(num) {
-    num = num || 0;
-    return _levels[num];
+    num = num || 1;
+    if(num > _levels.length) return false;
+    return _levels[num - 1];
   }
 
   function getLevelCount() {

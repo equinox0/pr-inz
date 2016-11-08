@@ -11,6 +11,8 @@ function VisualisationController(VisualisationService) {
   vm.startVisualisation = startVisualisation;
 
   vm.$onInit = function() {
+    VisualisationService.setInitData(vm.initData);
+
     new Phaser.Game(320, 320, Phaser.AUTO, 'visualisation-column', {
      preload: VisualisationService.preload,
      create: VisualisationService.create,
