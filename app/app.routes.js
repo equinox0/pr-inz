@@ -12,7 +12,7 @@ angular.module('app')
               template: '<div ui-view></div>'
             })
             .state('game.level', {
-              url: '/game/level/{levelId:[0-9]}',
+              url: '/game/level/{levelId:[0-9]{1,2}}',
               template: '<game></game>'
             });
 

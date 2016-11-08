@@ -5,5 +5,10 @@
         Praca inzynierska
       </a>
     </div>
+    <ul class="nav navbar-nav">
+      <li ng-repeat="levelId in $ctrl.levelIds" ng-class="{'active': levelId == $ctrl.state.params.levelId}">
+        <a ui-sref="game.level({ levelId: {{levelId}} })">{{levelId}}</a>
+      </li>
+    </ul>
   </div>
 </nav>

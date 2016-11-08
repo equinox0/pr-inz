@@ -26,6 +26,22 @@ function AppService() {
     {
       blocks: [
         _blocks[0],
+      ],
+      visualisationData: {
+        playerStartPosition: {
+          x: 3,
+          y: 5
+        },
+        playerStartTurn: 'right',
+        coinPosition: {
+          x: 5,
+          y: 5
+        }
+      }
+    },
+    {
+      blocks: [
+        _blocks[0],
         _blocks[1],
         _blocks[2]
       ],
@@ -36,8 +52,8 @@ function AppService() {
         },
         playerStartTurn: 'right',
         coinPosition: {
-          x: 7,
-          y: 5
+          x: 5,
+          y: 3
         }
       }
     }
@@ -48,7 +64,12 @@ function AppService() {
     return _levels[num];
   }
 
+  function getLevelCount() {
+    return _levels.length;
+  }
+
   return {
-    getLevel: getLevel
+    getLevel: getLevel,
+    getLevelCount: getLevelCount
   }
 }
