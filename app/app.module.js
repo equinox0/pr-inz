@@ -1,3 +1,6 @@
 angular.module('app',
-  ['game', 'navbar', 'codeBlock',
-  'ui.router']);
+  ['ui.router',
+  'ui.tree',
+  'game',
+  'navbar',
+  'codeBlock']);

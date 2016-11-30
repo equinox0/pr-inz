@@ -1,3 +1,11 @@
 <div id='editor-workspace-column'>
-
+  <div ui-tree>
+    <ol ui-tree-nodes="" ng-model="$ctrl.blocks">
+      <li ui-tree-node data-nodrag ng-repeat="block in $ctrl.blocks">
+        <div ui-tree-handle>
+          <code-block block="block" ng-click="$ctrl.removeBlock($index)"></code-block>
+        </div>
+      </li>
+    </ol>
+  </div>
 </div>

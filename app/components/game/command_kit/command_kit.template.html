@@ -1,3 +1,11 @@
 <div id='command-kit-column'>
-  <code-block ng-repeat="block in $ctrl.blocks" block="block"></code-block>
+  <div ui-tree data-clone-enabled="true" data-nodrop-enabled="true">
+    <ol ui-tree-nodes ng-model="$ctrl.blocks">
+      <li ui-tree-node ng-repeat="block in $ctrl.blocks">
+        <div ui-tree-handle>
+          <code-block block="block"></code-block>
+        </div>
+      </li>
+    </ol>
+  </div>
 </div>
