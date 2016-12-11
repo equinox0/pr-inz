@@ -5,6 +5,7 @@ VisualisationService.$inject = ['TILE_SIZE'];
 
 function VisualisationService(TILE_SIZE) {
 
+  var _game = null;
   var _player = null;
   var _coin = null;
 
@@ -15,6 +16,7 @@ function VisualisationService(TILE_SIZE) {
   }
 
   function preload() {
+    _game = this;
     // Loads map
     this.load.tilemap('map', './app/components/game/visualisation/assets/base_map.json', null, Phaser.Tilemap.TILED_JSON);
     this.load.image('terrain', './app/components/game/visualisation/assets/terrain.png');
@@ -46,12 +48,38 @@ function VisualisationService(TILE_SIZE) {
     _player.angle = _getAngleOfTurn(_initData.playerStartTurn);
   }
 
+  var _updateDelay = 800;
+  var _timeCheck = null;
+  var mockArray = [
+    _turnLeft,
+    _goStraight,
+    _turnRight,
+    _goStraight,
+    _goStraight,
+    _turnLeft,
+    _goStraight
+  ];
+  var currentIndex = 0;
   function update() {
-      // TODO: !
+    _timeCheck = _timeCheck || this.time.now;
+    if( (this.time.now - _timeCheck) > _updateDelay) {
+      if(currentIndex < mockArray.length) {
+        mockArray[currentIndex]();
+
+        currentIndex++;
+      } else if(currentIndex == mockArray.length) {
+        console.log('finish');
+      }
+      _timeCheck = this.time.now;
+    }
   }
 
   function _countPositionOfTile(n) {
     return (n * TILE_SIZE) + TILE_SIZE / 2;
+  }
+
+  function _countTileFromPosition(n) {
+    return (n - TILE_SIZE / 2) / TILE_SIZE;
   }
 
   function _getAngleOfTurn(turn) {
@@ -66,6 +94,39 @@ function VisualisationService(TILE_SIZE) {
       default:
         return 0;
     }
+  }
+
+  // funkcję odpowiadające blokom kodu
+
+  function _goStraight() {
+    var speed = 150;
+    switch(_player.angle) {
+      case 0:
+        console.log('up');
+        _game.add.tween(_player).to( { y: _player.y - TILE_SIZE }, 150, "Linear", true);
+        break;
+      case 90:
+        console.log('right');
+        _game.add.tween(_player).to( { x: _player.x + TILE_SIZE }, 150, "Linear", true);
+        break;
+      case -90:
+        console.log('left');
+        _game.add.tween(_player).to( { x: _player.x - TILE_SIZE }, 150, "Linear", true);
+        break;
+      case 180:
+      case -180:
+        console.log('down');
+        _game.add.tween(_player).to( { y: _player.y + TILE_SIZE }, 150, "Linear", true);
+        break;
+    }
+  }
+
+  function _turnLeft() {
+    _game.add.tween(_player).to( { angle: _player.angle - 90 }, 150, "Linear", true);
+  }
+
+  function _turnRight() {
+    _game.add.tween(_player).to( { angle: _player.angle + 90 }, 150, "Linear", true);
   }
 
   return {

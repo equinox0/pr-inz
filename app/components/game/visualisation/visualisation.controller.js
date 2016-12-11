@@ -13,7 +13,7 @@ function VisualisationController(VisualisationService) {
   vm.$onInit = function() {
     VisualisationService.setInitData(vm.initData);
 
-    new Phaser.Game(320, 320, Phaser.AUTO, 'visualisation-column', {
+    game = new Phaser.Game(320, 320, Phaser.CANVAS, 'visualisation-column', {
      preload: VisualisationService.preload,
      create: VisualisationService.create,
      update: VisualisationService.update
