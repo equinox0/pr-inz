@@ -8,6 +8,7 @@
 
 <div class="row">
     <div class="col-xs-12">
-        <button id="start-button" type="button" class="btn btn-success" ng-click="$ctrl.startVisualisation()">Rozpocznij!</button>
+        <a ng-if="!$ctrl.isRunning" role="button" class="btn btn-success visualisation-button" ng-click="$ctrl.startVisualisation()">Rozpocznij!</a>
+        <a ng-if="$ctrl.isRunning" role="button" class="btn btn-danger visualisation-button" ng-click="$ctrl.resetVisualisation()">Zresetuj!</a>
     </div>
 </div>

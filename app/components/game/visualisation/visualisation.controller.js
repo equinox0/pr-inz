@@ -6,14 +6,17 @@ VisualisationController.$inject = ['VisualisationService'];
 function VisualisationController(VisualisationService) {
   var vm = this;
 
-  var game = null;
+  vm.game = null;
+  vm.isRunning = null;
 
   vm.startVisualisation = startVisualisation;
+  vm.resetVisualisation = resetVisualisation;
 
   vm.$onInit = function() {
-    VisualisationService.setInitData(vm.initData);
+    vm.isRunning = false;
 
-    game = new Phaser.Game(320, 320, Phaser.CANVAS, 'visualisation-column', {
+    VisualisationService.setInitData(vm.initData);
+    vm.game = new Phaser.Game(320, 320, Phaser.CANVAS, 'visualisation-column', {
      preload: VisualisationService.preload,
      create: VisualisationService.create,
      update: VisualisationService.update
@@ -21,6 +24,12 @@ function VisualisationController(VisualisationService) {
   }
 
   function startVisualisation() {
-    console.log('TODO: Start Visualisation');
+    vm.isRunning = true;
+    VisualisationService.startGame();
+  }
+
+  function resetVisualisation() {
+    vm.isRunning = false;
+    VisualisationService.resetGame();
   }
 }

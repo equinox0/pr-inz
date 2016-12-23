@@ -4,15 +4,70 @@ angular.module('game')
 VisualisationService.$inject = ['TILE_SIZE'];
 
 function VisualisationService(TILE_SIZE) {
-
+  /**
+  * Obiekt gry
+  */
   var _game = null;
+  /**
+  * Obiekty elementow znajdujacych sie w grze (gracza - samochod, oraz monety - celu)
+  */
   var _player = null;
   var _coin = null;
-
+  /**
+  * Dane potrzebne do ustawienia mapy gry:
+  * Połozenie gracza, zwrot oraz polozenie monety
+  */
   var _initData = null;
+  /**
+  * Czas opoznienia pomiedzy kolejnymi wykonaniami petli gry oraz timestamp sprawdzajacy czy czas juz minal
+  */
+  var _updateDelay = 800;
+  var _timeCheck = null;
+  /**
+  * Flaga okreslajaca czy animacja ma sie wykonywac
+  */
+  var _isRunning = false;
+  /**
+  * DO TESTOW
+  */
+  var mockArray = [
+    _turnLeft,
+    _goStraight,
+    _turnRight,
+    _goStraight,
+    _goStraight,
+    _turnLeft,
+    _goStraight
+  ];
+  /**
+  * Aktualny indeks bloku, ktory ma sie wykonywac
+  */
+  var currentIndex = 0;
 
+  /**
+   * Wprowadza wstępne dane gry do serwisu.
+   * @param {object} data dane poziomu w formacie JSON
+   */
   function setInitData(data) {
     _initData = data;
+  }
+
+  /**
+   * Resetuje poziom do wartości początkowych.
+   */
+  function resetGame() {
+    _isRunning = false;
+    currentIndex = 0;
+    _player.position.x = _countPositionOfTile(_initData.playerStartPosition.x);
+    _player.position.y = _countPositionOfTile(_initData.playerStartPosition.y);
+    _player.angle = _getAngleOfTurn(_initData.playerStartTurn);
+  }
+
+  /**
+   * Rozpoczyna działanie animacji.
+   */
+  function startGame() {
+    _isRunning = true;
   }
 
   function preload() {
@@ -48,29 +103,19 @@ function VisualisationService(TILE_SIZE) {
     _player.angle = _getAngleOfTurn(_initData.playerStartTurn);
   }
 
-  var _updateDelay = 800;
-  var _timeCheck = null;
-  var mockArray = [
-    _turnLeft,
-    _goStraight,
-    _turnRight,
-    _goStraight,
-    _goStraight,
-    _turnLeft,
-    _goStraight
-  ];
-  var currentIndex = 0;
   function update() {
-    _timeCheck = _timeCheck || this.time.now;
-    if( (this.time.now - _timeCheck) > _updateDelay) {
-      if(currentIndex < mockArray.length) {
-        mockArray[currentIndex]();
+    if(_isRunning) {
+      _timeCheck = _timeCheck || this.time.now;
+      if( (this.time.now - _timeCheck) > _updateDelay) {
+        if(currentIndex < mockArray.length) {
+          mockArray[currentIndex]();
 
-        currentIndex++;
-      } else if(currentIndex == mockArray.length) {
-        console.log('finish');
+          currentIndex++;
+        } else if(currentIndex == mockArray.length) {
+          console.log('finish');
+        }
+        _timeCheck = this.time.now;
       }
-      _timeCheck = this.time.now;
     }
   }
 
@@ -131,6 +176,8 @@ function VisualisationService(TILE_SIZE) {
 
   return {
     setInitData: setInitData,
+    resetGame: resetGame,
+    startGame: startGame,
     preload: preload,
     create: create,
     update: update
