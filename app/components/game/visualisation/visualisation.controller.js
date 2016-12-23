@@ -23,6 +23,11 @@ function VisualisationController(VisualisationService) {
     });
   }
 
+  vm.$onDestroy = function() {
+    VisualisationService.stopGame();
+    VisualisationService.resetGame();
+  }
+
   function startVisualisation() {
     vm.isRunning = true;
     VisualisationService.startGame();
@@ -30,6 +35,7 @@ function VisualisationController(VisualisationService) {
 
   function resetVisualisation() {
     vm.isRunning = false;
+    VisualisationService.stopGame();
     VisualisationService.resetGame();
   }
 }

@@ -1,11 +1,14 @@
 angular.module('game')
   .controller('CommandKitController', CommandKitController);
 
-CommandKitController.$inject = [];
+CommandKitController.$inject = ['$rootScope'];
 
-function CommandKitController() {
+function CommandKitController($rootScope) {
   var vm = this;
 
-  vm.$onInit = function() {
+  vm.treeOptions = {
+    dropped: function() {
+      $rootScope.$broadcast('event:editorBlocksChanged');
+    }
   }
 }

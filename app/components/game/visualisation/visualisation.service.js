@@ -1,9 +1,9 @@
 angular.module('game')
   .factory('VisualisationService', VisualisationService);
 
-VisualisationService.$inject = ['TILE_SIZE'];
+VisualisationService.$inject = ['TILE_SIZE', 'GameService'];
 
-function VisualisationService(TILE_SIZE) {
+function VisualisationService(TILE_SIZE, GameService) {
   /**
   * Obiekt gry
   */
@@ -56,7 +56,6 @@ function VisualisationService(TILE_SIZE) {
    * Resetuje poziom do wartości początkowych.
    */
   function resetGame() {
-    _isRunning = false;
     currentIndex = 0;
     _player.position.x = _countPositionOfTile(_initData.playerStartPosition.x);
     _player.position.y = _countPositionOfTile(_initData.playerStartPosition.y);
@@ -67,7 +66,15 @@ function VisualisationService(TILE_SIZE) {
    * Rozpoczyna działanie animacji.
    */
   function startGame() {
+    console.log(GameService.getBlocks());
     _isRunning = true;
+  }
+
+  /**
+   * Wyłącza działanie animacji.
+   */
+  function stopGame() {
+    _isRunning = false;
   }
 
   function preload() {
@@ -178,6 +185,7 @@ function VisualisationService(TILE_SIZE) {
     setInitData: setInitData,
     resetGame: resetGame,
     startGame: startGame,
+    stopGame: stopGame,
     preload: preload,
     create: create,
     update: update
