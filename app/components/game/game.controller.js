@@ -1,9 +1,9 @@
 angular.module('game')
   .controller('GameController', GameController);
 
-GameController.$inject = ['$stateParams', 'AppService', '$state'];
+GameController.$inject = ['$stateParams', 'AppService', '$state', '$rootScope', '$uibModal'];
 
-function GameController($stateParams, AppService, $state) {
+function GameController($stateParams, AppService, $state, $rootScope, $uibModal) {
   var vm = this;
 
   vm.currentLevel = null;
@@ -17,4 +17,27 @@ function GameController($stateParams, AppService, $state) {
       $state.go('main');
     }
   }
+
+  $rootScope.$on('visualisation:finished', function(event, data) {
+
+    var msg = null;
+    if(data === "won") msg = "Brawo, udało Ci się!";
+    else msg = "Niestety, nie udało Ci się. Sprobuj jeszcze raz."
+
+    $uibModal.open({
+        animation: true,
+        backdrop: 'static',
+        keyboard: true,
+        component: 'infoModal',
+        resolve: {
+            title: function() {
+              return "Wynik";
+            },
+            msg: function() {
+              return msg;
+            }
+        }
+      }
+    );
+  });
 }

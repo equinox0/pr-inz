@@ -1,12 +1,17 @@
 angular.module('game')
   .controller('EditorWorkspaceController', EditorWorkspaceController);
 
-EditorWorkspaceController.$inject = ['$rootScope', 'GameService'];
+EditorWorkspaceController.$inject = ['$rootScope', 'GameService', 'VisualisationService'];
 
-function EditorWorkspaceController($rootScope, GameService) {
+function EditorWorkspaceController($rootScope, GameService, VisualisationService) {
   var vm = this;
 
   vm.removeBlock = removeBlock;
+  vm.treeOptions = {
+    accept: function() {
+      return !VisualisationService.isRunning();
+    }
+  }
 
   $rootScope.$on('event:editorBlocksChanged', _updateBlocks);
 

@@ -75,6 +75,10 @@ function VisualisationService(TILE_SIZE, GameService, $rootScope) {
     _isRunning = false;
   }
 
+  function isRunning() {
+    return _isRunning;
+  }
+
   function preload() {
     _game = this;
     // Loads map
@@ -207,6 +211,7 @@ function VisualisationService(TILE_SIZE, GameService, $rootScope) {
     resetGame: resetGame,
     startGame: startGame,
     stopGame: stopGame,
+    isRunning: isRunning,
     preload: preload,
     create: create,
     update: update

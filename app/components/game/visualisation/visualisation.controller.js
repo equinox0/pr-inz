@@ -1,9 +1,9 @@
 angular.module('game')
   .controller('VisualisationController', VisualisationController);
 
-VisualisationController.$inject = ['VisualisationService', '$rootScope'];
+VisualisationController.$inject = ['VisualisationService'];
 
-function VisualisationController(VisualisationService, $rootScope) {
+function VisualisationController(VisualisationService) {
   var vm = this;
 
   vm.game = null;
@@ -27,10 +27,6 @@ function VisualisationController(VisualisationService, $rootScope) {
     VisualisationService.stopGame();
     VisualisationService.resetGame();
   }
-
-  $rootScope.$on('visualisation:finished', function(event, data) {
-    console.log(data);
-  })
 
   function startVisualisation() {
     vm.isRunning = true;
