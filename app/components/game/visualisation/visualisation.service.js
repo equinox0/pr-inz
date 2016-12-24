@@ -1,48 +1,46 @@
 angular.module('game')
   .factory('VisualisationService', VisualisationService);
 
-VisualisationService.$inject = ['TILE_SIZE', 'GameService'];
+VisualisationService.$inject = ['TILE_SIZE', 'GameService', '$rootScope'];
 
-function VisualisationService(TILE_SIZE, GameService) {
+function VisualisationService(TILE_SIZE, GameService, $rootScope) {
   /**
   * Obiekt gry
   */
   var _game = null;
+
   /**
   * Obiekty elementow znajdujacych sie w grze (gracza - samochod, oraz monety - celu)
   */
   var _player = null;
   var _coin = null;
+
   /**
   * Dane potrzebne do ustawienia mapy gry:
   * Połozenie gracza, zwrot oraz polozenie monety
   */
   var _initData = null;
+
   /**
   * Czas opoznienia pomiedzy kolejnymi wykonaniami petli gry oraz timestamp sprawdzajacy czy czas juz minal
   */
   var _updateDelay = 800;
   var _timeCheck = null;
+
   /**
   * Flaga okreslajaca czy animacja ma sie wykonywac
   */
   var _isRunning = false;
-  /**
-  * DO TESTOW
-  */
-  var mockArray = [
-    _turnLeft,
-    _goStraight,
-    _turnRight,
-    _goStraight,
-    _goStraight,
-    _turnLeft,
-    _goStraight
-  ];
+
   /**
   * Aktualny indeks bloku, ktory ma sie wykonywac
   */
-  var currentIndex = 0;
+  var _currentIndex = 0;
+
+  /**
+   * Lista blokow kodu do wykonania w petli
+   */
+  var _blocks = [];
 
   /**
    * Wprowadza wstępne dane gry do serwisu.
@@ -56,7 +54,7 @@ function VisualisationService(TILE_SIZE, GameService) {
    * Resetuje poziom do wartości początkowych.
    */
   function resetGame() {
-    currentIndex = 0;
+    _currentIndex = 0;
     _player.position.x = _countPositionOfTile(_initData.playerStartPosition.x);
     _player.position.y = _countPositionOfTile(_initData.playerStartPosition.y);
     _player.angle = _getAngleOfTurn(_initData.playerStartTurn);
@@ -66,7 +64,7 @@ function VisualisationService(TILE_SIZE, GameService) {
    * Rozpoczyna działanie animacji.
    */
   function startGame() {
-    console.log(GameService.getBlocks());
+    _blocks = GameService.getBlocks();
     _isRunning = true;
   }
 
@@ -114,16 +112,26 @@ function VisualisationService(TILE_SIZE, GameService) {
     if(_isRunning) {
       _timeCheck = _timeCheck || this.time.now;
       if( (this.time.now - _timeCheck) > _updateDelay) {
-        if(currentIndex < mockArray.length) {
-          mockArray[currentIndex]();
+        if(_currentIndex < _blocks.length) {
+          _parseBlock(_blocks[_currentIndex]);
 
-          currentIndex++;
-        } else if(currentIndex == mockArray.length) {
-          console.log('finish');
+          _currentIndex++;
+        } else if(_currentIndex == _blocks.length) {
+          if(isWon()) {
+            $rootScope.$broadcast('visualisation:finished', 'won');
+          } else {
+            $rootScope.$broadcast('visualisation:finished', 'lost');
+          }
+          _currentIndex++;
         }
         _timeCheck = this.time.now;
       }
     }
+  }
+
+  function isWon() {
+    return ( (_countTileFromPosition(_coin.position.x) ===  _countTileFromPosition(_player.position.x))
+      && (_countTileFromPosition(_coin.position.y) ===  _countTileFromPosition(_player.position.y)) );
   }
 
   function _countPositionOfTile(n) {
@@ -148,26 +156,39 @@ function VisualisationService(TILE_SIZE, GameService) {
     }
   }
 
+  function _parseBlock(block) {
+    if(block.type == 'function') {
+      switch(block.name) {
+        case 'goStraight':
+          _goStraight();
+          break;
+        case 'turnLeft':
+          _turnLeft();
+          break;
+        case 'turnRight':
+          _turnRight();
+          break;
+      }
+      return;
+    }
+  }
+
   // funkcję odpowiadające blokom kodu
 
   function _goStraight() {
     var speed = 150;
     switch(_player.angle) {
       case 0:
-        console.log('up');
         _game.add.tween(_player).to( { y: _player.y - TILE_SIZE }, 150, "Linear", true);
         break;
       case 90:
-        console.log('right');
         _game.add.tween(_player).to( { x: _player.x + TILE_SIZE }, 150, "Linear", true);
         break;
       case -90:
-        console.log('left');
         _game.add.tween(_player).to( { x: _player.x - TILE_SIZE }, 150, "Linear", true);
         break;
       case 180:
       case -180:
-        console.log('down');
         _game.add.tween(_player).to( { y: _player.y + TILE_SIZE }, 150, "Linear", true);
         break;
     }

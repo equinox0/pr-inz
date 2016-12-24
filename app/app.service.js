@@ -17,7 +17,7 @@ function AppService() {
     },
     {
       type: "function",
-      name: "goStraight",
+      name: "turnLeft",
       title: "Skręc w lewo"
     }
   ];
