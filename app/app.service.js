@@ -37,7 +37,11 @@ function AppService() {
           x: 5,
           y: 5
         }
-      }
+      },
+      levelInfo: "<p>Aplikacja, ktorej wlasnie uzywasz ma na celu nauke programowania w oparciu o <strong>bloki</strong>. "
+      + "Zacznijmy od prostego przykladu. Zlap blok funkcji przytrzymujac na nim lewy przycisk myszy, a nastepnie przeciagnij go do panelu po prawej stronie."
+      + "Powtorz te czynnosc dwa razy i wciśnij przycisk Rozpocznij! aby wykonac swoj program.</p>"
+      + "<p>Po zakonczeniu wykonywania wszystkich blokow kodu otrzymac okno z informacja o rezultacie.</p>"
     },
     {
       blocks: [
@@ -55,7 +59,14 @@ function AppService() {
           x: 5,
           y: 3
         }
-      }
+      },
+      levelInfo: "<p>W kolejnej lekcji masz do dyspozycji trzy bloki odpowiadające trzem funkcjom.</p>"
+      + "<p><strong>Funkcja</strong> to wydzielona część programu wykonująca jakieś operacje. Funkcje stosuje się, aby uprościć program główny i zwiększyć czytelność kodu.</p>"
+      + "<p>Nasze funkcje wykonują pojedyncze operacje jak obiekcie ktorym sterujemy (samochodem):"
+      + "<ul><li><strong>Jedz prosto</strong> - porusza obiektem do przodu o jedną kratę w stronę w ktora jest zwrocony</li>"
+      + "<li><strong>Skrec w lewo</strong> - obraca obiekt w lewo o 90 stopni</li>"
+      + "<li><strong>Skrec w prawo</strong> - obraca obiekt w prawo o 90 stopni</li></ul></p>"
+      + "<p>Funkcja z zalozenia powinna miec jak najmniejsza odpowiedzialnosc, dlatego w naszym przypadku kazda z funkcji wykonuje tylko pojedyncza operacje na obiekcie.</p>"
     }
   ];
 

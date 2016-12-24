@@ -1,5 +1,6 @@
 angular.module('app',
-  ['ui.router',
+  ['ngSanitize',
+  'ui.router',
   'ui.tree',
   'ui.bootstrap',
   'game',

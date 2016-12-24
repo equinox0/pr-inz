@@ -15,6 +15,23 @@ function GameController($stateParams, AppService, $state, $rootScope, $uibModal)
     vm.currentLevelData = AppService.getLevel(vm.currentLevel);
     if(!vm.currentLevelData) {
       $state.go('main');
+    } else {
+      if(!!vm.currentLevelData.levelInfo) {
+        $uibModal.open({
+            animation: true,
+            backdrop: 'static',
+            keyboard: true,
+            component: 'infoModal',
+            resolve: {
+                title: function() {
+                  return "Instrukcja";
+                },
+                msg: function() {
+                  return vm.currentLevelData.levelInfo;
+                }
+            }
+          });
+      }
     }
   }
 
