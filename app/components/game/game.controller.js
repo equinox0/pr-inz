@@ -51,10 +51,17 @@ function GameController($stateParams, AppService, $state, $rootScope, $uibModal,
   $rootScope.$on('visualisation:finished', function(event, data) {
 
     var msg = null;
-    if(data === "won") msg = "Brawo, udało Ci się!";
-    else msg = "Niestety, nie udało Ci się. Sprobuj jeszcze raz."
+    if(data === "won") msg = '<div class="alert alert-success" role="alert">'
+      + '<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>'
+      + ' Gratuluje, udało Ci się.'
+      + '<p>Wciśnij przycisk <strong>OK</strong> aby przejśc do kolejnego poziomu.</p>'
+      + '</div>';
+    else msg = '<div class="alert alert-danger" role="alert">'
+      + '<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>'
+      + ' Niestety, nie udało Ci się.'
+      + '<p>Wciśnij przycisk <strong>Zresetuj!</strong> i sprobuj ponownie.</p>'
+      + '</div>';
 
-    $timeout(function() {
       infoModalInstance = $uibModal.open({
           animation: true,
           backdrop: 'static',
@@ -74,6 +81,8 @@ function GameController($stateParams, AppService, $state, $rootScope, $uibModal,
           if(vm.currentLevel < vm.levelCount) {
             $state.go('game.level', {levelId: (Number(vm.currentLevel) + 1)});
           } else {
+
+            $timeout(function() {
             infoModalInstance = $uibModal.open({
                 animation: true,
                 backdrop: 'static',
@@ -89,10 +98,10 @@ function GameController($stateParams, AppService, $state, $rootScope, $uibModal,
                 }
               }
             )
+          }, 400);
           }
         }
         infoModalInstance = null;
       })
-    }, 500);
   });
 }
