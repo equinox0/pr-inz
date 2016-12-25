@@ -11,7 +11,7 @@
 
 .angular-ui-tree-empty {
   height: calc(100vh * 0.8 - 12px);
-  border: none;
+  /*border: none;*/
 }
 
 .angular-ui-tree-empty:after {
