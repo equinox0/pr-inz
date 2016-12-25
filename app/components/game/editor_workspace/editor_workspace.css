@@ -1,6 +1,7 @@
 #editor-workspace-column {
   width: 100%;
   height: calc(100vh * 0.8);
+  overflow-y: auto;
   margin: 0;
   padding: 0;
   background-color: rgb(210, 232, 219);

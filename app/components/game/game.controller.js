@@ -1,9 +1,9 @@
 angular.module('game')
   .controller('GameController', GameController);
 
-GameController.$inject = ['$stateParams', 'AppService', '$state', '$rootScope', '$uibModal'];
+GameController.$inject = ['$stateParams', 'AppService', '$state', '$rootScope', '$uibModal', '$timeout'];
 
-function GameController($stateParams, AppService, $state, $rootScope, $uibModal) {
+function GameController($stateParams, AppService, $state, $rootScope, $uibModal, $timeout) {
   var vm = this;
 
   vm.currentLevel = null;
@@ -21,20 +21,22 @@ function GameController($stateParams, AppService, $state, $rootScope, $uibModal)
       vm.currentLevelData = AppService.getLevel(vm.currentLevel);
 
       if(!!vm.currentLevelData.levelInfo) {
-        infoModalInstance = $uibModal.open({
-            animation: true,
-            backdrop: 'static',
-            keyboard: true,
-            component: 'infoModal',
-            resolve: {
-                title: function() {
-                  return "Instrukcja";
-                },
-                msg: function() {
-                  return vm.currentLevelData.levelInfo;
-                }
-            }
-          });
+        $timeout(function() {
+          infoModalInstance = $uibModal.open({
+              animation: true,
+              backdrop: 'static',
+              keyboard: true,
+              component: 'infoModal',
+              resolve: {
+                  title: function() {
+                    return "Instrukcja";
+                  },
+                  msg: function() {
+                    return vm.currentLevelData.levelInfo;
+                  }
+              }
+            });
+        }, 800);
       }
     }
   }
@@ -52,43 +54,45 @@ function GameController($stateParams, AppService, $state, $rootScope, $uibModal)
     if(data === "won") msg = "Brawo, udało Ci się!";
     else msg = "Niestety, nie udało Ci się. Sprobuj jeszcze raz."
 
-    infoModalInstance = $uibModal.open({
-        animation: true,
-        backdrop: 'static',
-        keyboard: true,
-        component: 'infoModal',
-        resolve: {
-            title: function() {
-              return "Wynik";
-            },
-            msg: function() {
-              return msg;
-            }
-        }
-      }
-    ).closed.then(function() {
-      if(data === "won") {
-        if(vm.currentLevel < vm.levelCount) {
-          $state.go('game.level', {levelId: (Number(vm.currentLevel) + 1)});
-        } else {
-          infoModalInstance = $uibModal.open({
-              animation: true,
-              backdrop: 'static',
-              keyboard: true,
-              component: 'infoModal',
-              resolve: {
-                  title: function() {
-                    return "Gratulacje!";
-                  },
-                  msg: function() {
-                    return "Brawo, udało Ci się przejśc wszystkie poziomy!";
-                  }
+    $timeout(function() {
+      infoModalInstance = $uibModal.open({
+          animation: true,
+          backdrop: 'static',
+          keyboard: true,
+          component: 'infoModal',
+          resolve: {
+              title: function() {
+                return "Wynik";
+              },
+              msg: function() {
+                return msg;
               }
-            }
-          )
+          }
         }
-      }
-      infoModalInstance = null;
-    })
+      ).closed.then(function() {
+        if(data === "won") {
+          if(vm.currentLevel < vm.levelCount) {
+            $state.go('game.level', {levelId: (Number(vm.currentLevel) + 1)});
+          } else {
+            infoModalInstance = $uibModal.open({
+                animation: true,
+                backdrop: 'static',
+                keyboard: true,
+                component: 'infoModal',
+                resolve: {
+                    title: function() {
+                      return "Gratulacje!";
+                    },
+                    msg: function() {
+                      return "Brawo, udało Ci się przejśc wszystkie poziomy!";
+                    }
+                }
+              }
+            )
+          }
+        }
+        infoModalInstance = null;
+      })
+    }, 500);
   });
 }
