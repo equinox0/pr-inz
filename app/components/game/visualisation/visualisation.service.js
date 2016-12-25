@@ -16,6 +16,17 @@ function VisualisationService(TILE_SIZE, GameService, $rootScope) {
   var _coin = null;
 
   /**
+   * Numery kafli, na ktore gracz nie moze juz wejsc
+   * @type {Object}
+   */
+  var _mapBoundTiles = {
+    up: 0,
+    right: 9,
+    down: 9,
+    left: 0
+  }
+
+  /**
   * Dane potrzebne do ustawienia mapy gry:
   * Połozenie gracza, zwrot oraz polozenie monety
   */
@@ -183,17 +194,25 @@ function VisualisationService(TILE_SIZE, GameService, $rootScope) {
     var speed = 150;
     switch(_player.angle) {
       case 0:
-        _game.add.tween(_player).to( { y: _player.y - TILE_SIZE }, 150, "Linear", true);
+        if(_countTileFromPosition(_player.y - TILE_SIZE) > _mapBoundTiles.up) {
+          _game.add.tween(_player).to( { y: _player.y - TILE_SIZE }, 150, "Linear", true);
+        }
         break;
       case 90:
-        _game.add.tween(_player).to( { x: _player.x + TILE_SIZE }, 150, "Linear", true);
+        if(_countTileFromPosition(_player.x + TILE_SIZE) < _mapBoundTiles.right) {
+          _game.add.tween(_player).to( { x: _player.x + TILE_SIZE }, 150, "Linear", true);
+        }
         break;
       case -90:
-        _game.add.tween(_player).to( { x: _player.x - TILE_SIZE }, 150, "Linear", true);
+        if(_countTileFromPosition(_player.x - TILE_SIZE) > _mapBoundTiles.left) {
+          _game.add.tween(_player).to( { x: _player.x - TILE_SIZE }, 150, "Linear", true);
+        }
         break;
       case 180:
       case -180:
-        _game.add.tween(_player).to( { y: _player.y + TILE_SIZE }, 150, "Linear", true);
+        if(_countTileFromPosition(_player.y + TILE_SIZE) < _mapBoundTiles.down) {
+          _game.add.tween(_player).to( { y: _player.y + TILE_SIZE }, 150, "Linear", true);
+        }
         break;
     }
   }

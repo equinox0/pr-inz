@@ -24,8 +24,10 @@ function VisualisationController(VisualisationService) {
   }
 
   vm.$onDestroy = function() {
-    VisualisationService.stopGame();
-    VisualisationService.resetGame();
+    if(vm.initData) {
+      VisualisationService.stopGame();
+      VisualisationService.resetGame();
+    }
   }
 
   function startVisualisation() {
