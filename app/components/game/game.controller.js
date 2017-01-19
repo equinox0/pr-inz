@@ -1,9 +1,9 @@
 angular.module('game')
   .controller('GameController', GameController);
 
-GameController.$inject = ['$stateParams', 'AppService', '$state', '$rootScope', '$uibModal', '$timeout'];
+GameController.$inject = ['$stateParams', 'AppService', '$state', '$scope', '$uibModal', '$timeout', 'Notification'];
 
-function GameController($stateParams, AppService, $state, $rootScope, $uibModal, $timeout) {
+function GameController($stateParams, AppService, $state, $scope, $uibModal, $timeout, Notification) {
   var vm = this;
 
   vm.currentLevel = null;
@@ -48,60 +48,24 @@ function GameController($stateParams, AppService, $state, $rootScope, $uibModal,
     }
   }
 
-  $rootScope.$on('visualisation:finished', function(event, data) {
+  $scope.$on('visualisation:finished', function(event, data) {
+    if(data === "won") {
+      Notification.success({message: '<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>'
+        + ' Gratuluje, udało Ci się.'
+        + '<p>Wciśnij przycisk <strong>OK</strong> aby przejśc do kolejnego poziomu.</p>', title: 'Wynik'});
 
-    var msg = null;
-    if(data === "won") msg = '<div class="alert alert-success" role="alert">'
-      + '<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>'
-      + ' Gratuluje, udało Ci się.'
-      + '<p>Wciśnij przycisk <strong>OK</strong> aby przejśc do kolejnego poziomu.</p>'
-      + '</div>';
-    else msg = '<div class="alert alert-danger" role="alert">'
-      + '<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>'
-      + ' Niestety, nie udało Ci się.'
-      + '<p>Wciśnij przycisk <strong>Zresetuj!</strong> i sprobuj ponownie.</p>'
-      + '</div>';
-
-      infoModalInstance = $uibModal.open({
-          animation: true,
-          backdrop: 'static',
-          keyboard: true,
-          component: 'infoModal',
-          resolve: {
-              title: function() {
-                return "Wynik";
-              },
-              msg: function() {
-                return msg;
-              }
-          }
-        }
-      ).closed.then(function() {
-        if(data === "won") {
+        $timeout(function() {
           if(vm.currentLevel < vm.levelCount) {
-            $state.go('game.level', {levelId: (Number(vm.currentLevel) + 1)});
-          } else {
+              $state.go('game.level', {levelId: (Number(vm.currentLevel) + 1)});
+            } else {
+              Notification.success({message: '<h4>Brawo, udało Ci się przejśc wszystkie poziomy!</h4>', title: 'Gratulacje!', delay: 800});
+            }
+        }, 600)
 
-            $timeout(function() {
-            infoModalInstance = $uibModal.open({
-                animation: true,
-                backdrop: 'static',
-                keyboard: true,
-                component: 'infoModal',
-                resolve: {
-                    title: function() {
-                      return "Gratulacje!";
-                    },
-                    msg: function() {
-                      return "Brawo, udało Ci się przejśc wszystkie poziomy!";
-                    }
-                }
-              }
-            )
-          }, 400);
-          }
-        }
-        infoModalInstance = null;
-      })
+      } else {
+        Notification.error({message: '<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>'
+          + ' Niestety, nie udało Ci się.'
+          + '<p>Wciśnij przycisk <strong>Zresetuj!</strong> i sprobuj ponownie.</p>', title: 'Wynik'});
+      }
   });
 }

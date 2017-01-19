@@ -67,6 +67,65 @@ function AppService() {
       + "<li><strong>Skrec w lewo</strong> - obraca obiekt w lewo o 90 stopni</li>"
       + "<li><strong>Skrec w prawo</strong> - obraca obiekt w prawo o 90 stopni</li></ul></p>"
       + "<p>Funkcja z zalozenia powinna miec jak najmniejsza odpowiedzialnosc, dlatego w naszym przypadku kazda z funkcji wykonuje tylko pojedyncza operacje na obiekcie.</p>"
+    },
+    {
+      blocks: [
+        _blocks[0]
+      ],
+      visualisationData: {
+        playerStartPosition: {
+          x: 2,
+          y: 5
+        },
+        playerStartTurn: 'right',
+        coinPosition: {
+          x: 7,
+          y: 5
+        }
+      },
+      levelInfo: "<p>Pewnie zauważyłeś, że gdy chcesz przemieścić obiekt o kilka pól w tym samym kierunku, musisz kilkukrotnie wywołać funkcję <strong>Idź do przodu.</strong></p>"
+      + "<p>Żeby zapobiedz wielokrotnemu wywoływaniu tych samych funkcji wprowadzimy teraz pojęcie pętli.</p>"
+      + "<p><strong>Pętla</strong> jest konstrukcją umożliwiającą powtarzalne wykonanie ciągu instrukcji określoną liczbę razy, lub do momentu zajścia pewnych warunków</p>"
+      + "<p>W tej lekcji skupimy się na <strong>pętli iteracyjnej</strong>, której używamy, gdy z góry wiemy ile razy chcemy powtórzyć wykonanie określonego ciągu instrukcji</p>"
+    },
+    {
+      blocks: [
+        _blocks[0]
+      ],
+      visualisationData: {
+        playerStartPosition: {
+          x: 2,
+          y: 5
+        },
+        playerStartTurn: 'right',
+        coinPosition: {
+          x: 7,
+          y: 5
+        }
+      },
+      levelInfo: "<p>Jak pamiętasz z poprzedniej lekcji, pętle iteracyjne nie są jedynymi rodzajami tych konstrukcji.</p>"
+      + "<p>Kolejnym rodzajem jest <strong>pętla warunkowa</strong>, która będzie wykonywana dopóki podany jej warunek będzie prawdziwy.</p>"
+      + "<p>Pętla warunkowa różni się od pętli iteracyjnej tym, że nie musimy wiedzieć ile razy pętla powinna się wykonać.</p>"
+    },
+    {
+      blocks: [
+        _blocks[0],
+        _blocks[2]
+      ],
+      visualisationData: {
+        playerStartPosition: {
+          x: 3,
+          y: 5
+        },
+        playerStartTurn: 'right',
+        coinPosition: {
+          x: 8,
+          y: 3
+        }
+      },
+      levelInfo: "<p>W tej lekcji poznasz kolejny ważny element języków programowania, jakim jest <strong>instrukcja warunkowa</strong>.</p>"
+      + "<p><strong>Instrukcja warunkowa</strong> pozwala na wykonanie pewnego bloku instrukcji w zależności czy podane przez programistę wyrażenie logiczne jest prawdziwe, czy fałszywe.</p>"
+      + "<p><strong>Instrukcja warunkowa</strong> jest w pewnym sensie związana z poznaną w poprzedniej lekcji <strong>pętlą warunkową</strong>, ponieważ w obu przypadkach do wykonania podanego ciągu instrukcji wymagane jest, by podane wyrażenie logiczne było prawdzie.</p>"
     }
   ];
 
