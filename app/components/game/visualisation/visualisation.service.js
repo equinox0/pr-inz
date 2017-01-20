@@ -1,9 +1,9 @@
 angular.module('game')
   .factory('VisualisationService', VisualisationService);
 
-VisualisationService.$inject = ['TILE_SIZE', 'GameService', '$rootScope'];
+VisualisationService.$inject = ['TILE_SIZE', 'GameService', '$rootScope', '$timeout'];
 
-function VisualisationService(TILE_SIZE, GameService, $rootScope) {
+function VisualisationService(TILE_SIZE, GameService, $rootScope, $timeout) {
   /**
   * Obiekt gry
   */
@@ -52,6 +52,11 @@ function VisualisationService(TILE_SIZE, GameService, $rootScope) {
    * Lista blokow kodu do wykonania w petli
    */
   var _blocks = [];
+
+  /**
+   * Czas trwania animacji
+   */
+  var animationTime = 150;
 
   /**
    * Wprowadza wstępne dane gry do serwisu.
@@ -129,7 +134,11 @@ function VisualisationService(TILE_SIZE, GameService, $rootScope) {
       if( (this.time.now - _timeCheck) > _updateDelay) {
         if(_currentIndex < _blocks.length) {
           _parseBlock(_blocks[_currentIndex]);
-
+          $timeout(function() {
+            if(isOnCoin()) {
+              _coin.visible = false;
+            }
+          }, animationTime);
           _currentIndex++;
         } else if(_currentIndex == _blocks.length) {
           if(isWon()) {
@@ -145,6 +154,10 @@ function VisualisationService(TILE_SIZE, GameService, $rootScope) {
   }
 
   function isWon() {
+    return !_coin.visible;
+  }
+
+  function isOnCoin() {
     return ( (_countTileFromPosition(_coin.position.x) ===  _countTileFromPosition(_player.position.x))
       && (_countTileFromPosition(_coin.position.y) ===  _countTileFromPosition(_player.position.y)) );
   }
@@ -195,34 +208,34 @@ function VisualisationService(TILE_SIZE, GameService, $rootScope) {
     switch(_player.angle) {
       case 0:
         if(_countTileFromPosition(_player.y - TILE_SIZE) > _mapBoundTiles.up) {
-          _game.add.tween(_player).to( { y: _player.y - TILE_SIZE }, 150, "Linear", true);
+          _game.add.tween(_player).to( { y: _player.y - TILE_SIZE }, animationTime, "Linear", true);
         }
         break;
       case 90:
         if(_countTileFromPosition(_player.x + TILE_SIZE) < _mapBoundTiles.right) {
-          _game.add.tween(_player).to( { x: _player.x + TILE_SIZE }, 150, "Linear", true);
+          _game.add.tween(_player).to( { x: _player.x + TILE_SIZE }, animationTime, "Linear", true);
         }
         break;
       case -90:
         if(_countTileFromPosition(_player.x - TILE_SIZE) > _mapBoundTiles.left) {
-          _game.add.tween(_player).to( { x: _player.x - TILE_SIZE }, 150, "Linear", true);
+          _game.add.tween(_player).to( { x: _player.x - TILE_SIZE }, animationTime, "Linear", true);
         }
         break;
       case 180:
       case -180:
         if(_countTileFromPosition(_player.y + TILE_SIZE) < _mapBoundTiles.down) {
-          _game.add.tween(_player).to( { y: _player.y + TILE_SIZE }, 150, "Linear", true);
+          _game.add.tween(_player).to( { y: _player.y + TILE_SIZE }, animationTime, "Linear", true);
         }
         break;
     }
   }
 
   function _turnLeft() {
-    _game.add.tween(_player).to( { angle: _player.angle - 90 }, 150, "Linear", true);
+    _game.add.tween(_player).to( { angle: _player.angle - 90 }, animationTime, "Linear", true);
   }
 
   function _turnRight() {
-    _game.add.tween(_player).to( { angle: _player.angle + 90 }, 150, "Linear", true);
+    _game.add.tween(_player).to( { angle: _player.angle + 90 }, animationTime, "Linear", true);
   }
 
   return {
