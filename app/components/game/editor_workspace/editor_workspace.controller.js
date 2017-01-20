@@ -1,9 +1,9 @@
 angular.module('game')
   .controller('EditorWorkspaceController', EditorWorkspaceController);
 
-EditorWorkspaceController.$inject = ['$rootScope', 'GameService', 'VisualisationService'];
+EditorWorkspaceController.$inject = ['$scope', 'GameService', 'VisualisationService'];
 
-function EditorWorkspaceController($rootScope, GameService, VisualisationService) {
+function EditorWorkspaceController($scope, GameService, VisualisationService) {
   var vm = this;
 
   vm.removeBlock = removeBlock;
@@ -13,7 +13,7 @@ function EditorWorkspaceController($rootScope, GameService, VisualisationService
     }
   }
 
-  $rootScope.$on('event:editorBlocksChanged', _updateBlocks);
+  $scope.$on('event:editorBlocksChanged', _updateBlocks);
 
   vm.$onInit = function() {
     vm.blocks = [];
@@ -21,8 +21,10 @@ function EditorWorkspaceController($rootScope, GameService, VisualisationService
   }
 
   function removeBlock(index) {
-    vm.blocks.splice(index, 1);
-    _updateBlocks();
+    if(!VisualisationService.isRunning()) {
+      vm.blocks.splice(index, 1);
+      _updateBlocks();
+    }
   }
 
   function _updateBlocks() {
