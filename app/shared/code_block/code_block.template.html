@@ -1,4 +1,6 @@
-<div class="code-block"
-  ng-class="{'function-block': $ctrl.block.type === 'function', 'loop-block': $ctrl.block.type === 'loop', 'condition-block': $ctrl.block.type === 'condition'}">
-  <strong>{{ $ctrl.block.title }}</strong>
+<div ng-if="!!$ctrl.block.type" class="code-block" ng-switch="$ctrl.block.type">
+    <function-block ng-switch-when="function" block="$ctrl.block"></function-block>
+    <i-loop-block ng-switch-when="iLoop" block="$ctrl.block"></i-loop-block>
+    <c-loop-block ng-switch-when="cLoop" block="$ctrl.block"></c-loop-block>
+    <conditional-block ng-switch-when="condition" block="$ctrl.block"></conditional-block>
 </div>

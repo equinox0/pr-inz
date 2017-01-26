@@ -5,7 +5,4 @@ CodeBlockController.$inject = [];
 
 function CodeBlockController() {
   var vm = this;
-
-  vm.$onInit = function() {
-  }
 }

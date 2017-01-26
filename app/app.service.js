@@ -8,17 +8,38 @@ function AppService() {
     {
       type: "function",
       name: "goStraight",
-      title: "Idź prosto"
+      label: "Idź prosto"
     },
     {
       type: "function",
       name: "turnRight",
-      title: "Skręc w prawo"
+      label: "Skręc w prawo"
     },
     {
       type: "function",
       name: "turnLeft",
-      title: "Skręc w lewo"
+      label: "Skręc w lewo"
+    },
+    {
+      type: "iLoop",
+      number: null,
+      code: []
+    },
+    {
+      type: "cLoop",
+      condition: {
+        name: "notCollected",
+        label: "Nie zebrano monety"
+      },
+      code: []
+    },
+    {
+      type: "condition",
+      condition: {
+        name: "obstacle",
+        label: "Przeszkoda"
+      },
+      code: []
     }
   ];
 
@@ -47,7 +68,7 @@ function AppService() {
       blocks: [
         _blocks[0],
         _blocks[1],
-        _blocks[2]
+        _blocks[2],
       ],
       visualisationData: {
         playerStartPosition: {
@@ -70,7 +91,8 @@ function AppService() {
     },
     {
       blocks: [
-        _blocks[0]
+        _blocks[0],
+        _blocks[3]
       ],
       visualisationData: {
         playerStartPosition: {
@@ -90,7 +112,8 @@ function AppService() {
     },
     {
       blocks: [
-        _blocks[0]
+        _blocks[0],
+        _blocks[4]
       ],
       visualisationData: {
         playerStartPosition: {
@@ -110,7 +133,10 @@ function AppService() {
     {
       blocks: [
         _blocks[0],
-        _blocks[2]
+        _blocks[1],
+        _blocks[2],
+        _blocks[4],
+        _blocks[5]
       ],
       visualisationData: {
         playerStartPosition: {
