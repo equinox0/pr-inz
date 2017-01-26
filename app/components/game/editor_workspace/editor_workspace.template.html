@@ -1,11 +1,14 @@
+<script type="text/ng-template" id="blocks_renderer.html">
+    <code-block block="block" ng-click="$ctrl.removeBlock($index)"></code-block>
+  <ol ui-tree-nodes="" ng-model="block.code">
+    <li ng-repeat="block in block.code" ui-tree-node ng-include="'blocks_renderer.html'"></li>
+  </ol>
+</script>
+
 <div id='editor-workspace-column'>
   <div ui-tree="$ctrl.treeOptions">
     <ol ui-tree-nodes="" ng-model="$ctrl.blocks">
-      <li ui-tree-node data-nodrag ng-repeat="block in $ctrl.blocks">
-        <div ui-tree-handle>
-          <code-block block="block" ng-click="$ctrl.removeBlock($index)"></code-block>
-        </div>
-      </li>
+      <li ui-tree-node ng-repeat="block in $ctrl.blocks" ng-include="'blocks_renderer.html'"></li>
     </ol>
   </div>
 </div>
