@@ -49,11 +49,11 @@ function AppService() {
         _blocks[0],
       ],
       visualisationData: {
-        playerStartPosition: {
+        playerPosition: {
           x: 3,
           y: 5
         },
-        playerStartTurn: 'right',
+        playerTurn: 'right',
         coinPosition: {
           x: 5,
           y: 5
@@ -71,11 +71,11 @@ function AppService() {
         _blocks[2],
       ],
       visualisationData: {
-        playerStartPosition: {
+        playerPosition: {
           x: 3,
           y: 5
         },
-        playerStartTurn: 'right',
+        playerTurn: 'right',
         coinPosition: {
           x: 5,
           y: 3
@@ -95,11 +95,11 @@ function AppService() {
         _blocks[3]
       ],
       visualisationData: {
-        playerStartPosition: {
+        playerPosition: {
           x: 2,
           y: 5
         },
-        playerStartTurn: 'right',
+        playerTurn: 'right',
         coinPosition: {
           x: 7,
           y: 5
@@ -116,11 +116,11 @@ function AppService() {
         _blocks[4]
       ],
       visualisationData: {
-        playerStartPosition: {
+        playerPosition: {
           x: 2,
           y: 5
         },
-        playerStartTurn: 'right',
+        playerTurn: 'right',
         coinPosition: {
           x: 7,
           y: 5
@@ -139,11 +139,11 @@ function AppService() {
         _blocks[5]
       ],
       visualisationData: {
-        playerStartPosition: {
+        playerPosition: {
           x: 3,
           y: 5
         },
-        playerStartTurn: 'right',
+        playerTurn: 'right',
         coinPosition: {
           x: 8,
           y: 3

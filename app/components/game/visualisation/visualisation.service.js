@@ -1,9 +1,9 @@
 angular.module('game')
   .factory('VisualisationService', VisualisationService);
 
-VisualisationService.$inject = ['TILE_SIZE', 'GameService', '$rootScope', '$timeout'];
+VisualisationService.$inject = ['TILE_SIZE', 'GameService', '$rootScope', '$timeout', 'BlockParserService'];
 
-function VisualisationService(TILE_SIZE, GameService, $rootScope, $timeout) {
+function VisualisationService(TILE_SIZE, GameService, $rootScope, $timeout, BlockParserService) {
   /**
   * Obiekt gry
   */
@@ -44,8 +44,8 @@ function VisualisationService(TILE_SIZE, GameService, $rootScope, $timeout) {
   var _isRunning = false;
 
   /**
-  * Aktualny indeks bloku, ktory ma sie wykonywac
-  */
+   * Aktualny indeks bloku, ktory ma sie wykonywac
+   */
   var _currentIndex = 0;
 
   /**
@@ -71,16 +71,16 @@ function VisualisationService(TILE_SIZE, GameService, $rootScope, $timeout) {
    */
   function resetGame() {
     _currentIndex = 0;
-    _player.position.x = _countPositionOfTile(_initData.playerStartPosition.x);
-    _player.position.y = _countPositionOfTile(_initData.playerStartPosition.y);
-    _player.angle = _getAngleOfTurn(_initData.playerStartTurn);
+    _player.position.x = _countPositionOfTile(_initData.playerPosition.x);
+    _player.position.y = _countPositionOfTile(_initData.playerPosition.y);
+    _player.angle = _getAngleOfTurn(_initData.playerTurn);
   }
 
   /**
    * Rozpoczyna działanie animacji.
    */
   function startGame() {
-    _blocks = GameService.getBlocks();
+    _blocks = BlockParserService.parseBlocksToFuncions(GameService.getBlocks(), _initData, _mapBoundTiles);
     _isRunning = true;
   }
 
@@ -89,6 +89,7 @@ function VisualisationService(TILE_SIZE, GameService, $rootScope, $timeout) {
    */
   function stopGame() {
     _isRunning = false;
+    parsingStarted = false;
   }
 
   function isRunning() {
@@ -121,11 +122,11 @@ function VisualisationService(TILE_SIZE, GameService, $rootScope, $timeout) {
     _coin.animations.add('rotate', null, 15, true);
     _coin.play('rotate');
 
-    _player = this.add.sprite(_countPositionOfTile(_initData.playerStartPosition.x),
-                              _countPositionOfTile(_initData.playerStartPosition.y),
+    _player = this.add.sprite(_countPositionOfTile(_initData.playerPosition.x),
+                              _countPositionOfTile(_initData.playerPosition.y),
                               'player');
     _player.anchor.set(0.5);
-    _player.angle = _getAngleOfTurn(_initData.playerStartTurn);
+    _player.angle = _getAngleOfTurn(_initData.playerTurn);
   }
 
   function update() {
@@ -133,7 +134,7 @@ function VisualisationService(TILE_SIZE, GameService, $rootScope, $timeout) {
       _timeCheck = _timeCheck || this.time.now;
       if( (this.time.now - _timeCheck) > _updateDelay) {
         if(_currentIndex < _blocks.length) {
-          _parseBlock(_blocks[_currentIndex]);
+          _parseFunction(_blocks[_currentIndex]);
           $timeout(function() {
             if(isOnCoin()) {
               _coin.visible = false;
@@ -184,7 +185,7 @@ function VisualisationService(TILE_SIZE, GameService, $rootScope, $timeout) {
     }
   }
 
-  function _parseBlock(block) {
+  function _parseFunction(block) {
     if(block.type == 'function') {
       switch(block.name) {
         case 'goStraight':
@@ -197,37 +198,44 @@ function VisualisationService(TILE_SIZE, GameService, $rootScope, $timeout) {
           _turnRight();
           break;
       }
-      return;
     }
   }
 
   // funkcję odpowiadające blokom kodu
 
   function _goStraight() {
-    var speed = 150;
+    var tween = null;
+
     switch(_player.angle) {
       case 0:
         if(_countTileFromPosition(_player.y - TILE_SIZE) > _mapBoundTiles.up) {
-          _game.add.tween(_player).to( { y: _player.y - TILE_SIZE }, animationTime, "Linear", true);
+          tween = _game.add.tween(_player).to( { y: _player.y - TILE_SIZE }, animationTime, "Linear", true);
         }
         break;
       case 90:
         if(_countTileFromPosition(_player.x + TILE_SIZE) < _mapBoundTiles.right) {
-          _game.add.tween(_player).to( { x: _player.x + TILE_SIZE }, animationTime, "Linear", true);
+          tween = _game.add.tween(_player).to( { x: _player.x + TILE_SIZE }, animationTime, "Linear", true);
         }
         break;
       case -90:
         if(_countTileFromPosition(_player.x - TILE_SIZE) > _mapBoundTiles.left) {
-          _game.add.tween(_player).to( { x: _player.x - TILE_SIZE }, animationTime, "Linear", true);
+          tween = _game.add.tween(_player).to( { x: _player.x - TILE_SIZE }, animationTime, "Linear", true);
         }
         break;
       case 180:
       case -180:
         if(_countTileFromPosition(_player.y + TILE_SIZE) < _mapBoundTiles.down) {
-          _game.add.tween(_player).to( { y: _player.y + TILE_SIZE }, animationTime, "Linear", true);
+          tween = _game.add.tween(_player).to( { y: _player.y + TILE_SIZE }, animationTime, "Linear", true);
         }
         break;
     }
+
+    tween.onComplete.add(function() {
+      if(isOnCoin()) {
+        _coin.visible = false;
+      }
+    });
+
   }
 
   function _turnLeft() {

@@ -20,9 +20,9 @@ function EditorWorkspaceController($scope, GameService, VisualisationService) {
     GameService.setBlocks(vm.blocks);
   }
 
-  function removeBlock(index) {
+  function removeBlock(scope) {
     if(!VisualisationService.isRunning()) {
-      vm.blocks.splice(index, 1);
+      scope.remove();
       _updateBlocks();
     }
   }
