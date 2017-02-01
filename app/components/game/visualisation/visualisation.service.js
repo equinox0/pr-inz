@@ -80,7 +80,7 @@ function VisualisationService(TILE_SIZE, GameService, $rootScope, $timeout, Bloc
    * Rozpoczyna działanie animacji.
    */
   function startGame() {
-    _blocks = BlockParserService.parseBlocksToFuncions(GameService.getBlocks(), _initData, _mapBoundTiles);
+    _blocks = BlockParserService.parseBlocksToFuncions(GameService.getBlocks(), angular.copy(_initData), angular.copy(_mapBoundTiles));
     _isRunning = true;
   }
 

@@ -58,7 +58,7 @@ function GameController($stateParams, AppService, $state, $scope, $uibModal, $ti
           if(vm.currentLevel < vm.levelCount) {
               $state.go('game.level', {levelId: (Number(vm.currentLevel) + 1)});
             } else {
-              Notification.success({message: '<h4>Brawo, udało Ci się przejśc wszystkie poziomy!</h4>', title: 'Gratulacje!', delay: 800});
+              Notification.success({message: '<h4>Brawo, udało Ci się przejśc wszystkie poziomy!</h4>', title: 'Gratulacje!'});
             }
         }, 600)
 
