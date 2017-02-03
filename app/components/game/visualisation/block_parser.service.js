@@ -18,41 +18,59 @@ function BlockParserService() {
           }
           break;
         case 'cLoop':
-          //bo to sens życia
-          var maxReps = 42;
-          var rep = 0;
-          while(!(gameData.playerPosition.x === gameData.coinPosition.x && gameData.playerPosition.y === gameData.coinPosition.y) && rep <= maxReps) {
-            functions = functions.concat(parseBlocksToFuncions(block.code, gameData, mapBoundTiles));
-            rep++;
-          }
+          functions = functions.concat(_parseCLoop(gameData, block, mapBoundTiles));
           break;
         case 'condition':
-          switch(gameData.playerTurn) {
-            case 'up':
-              if(gameData.playerPosition.y - 1 === mapBoundTiles.up) {
-                functions = functions.concat(parseBlocksToFuncions(block.code, gameData, mapBoundTiles));
-              }
-              break;
-            case 'right':
-              if(gameData.playerPosition.x + 1 === mapBoundTiles.right) {
-                functions = functions.concat(parseBlocksToFuncions(block.code, gameData, mapBoundTiles));
-              }
-              break;
-            case 'down':
-              if(gameData.playerPosition.y + 1 === mapBoundTiles.down) {
-                functions = functions.concat(parseBlocksToFuncions(block.code, gameData, mapBoundTiles));
-              }
-              break;
-            case 'left':
-              if(gameData.playerPosition.x - 1 === mapBoundTiles.left) {
-                functions = functions.concat(parseBlocksToFuncions(block.code, gameData, mapBoundTiles));
-              }
-              break;
-          }
+          functions = functions.concat(_parseCondition(gameData, block, mapBoundTiles));
           break;
       }
     })
+    return functions;
+  }
 
+  function _parseCondition(gameData, block, mapBoundTiles) {
+    var functions = [];
+    switch(block.condition.name) {
+      case "obstacle":
+        switch(gameData.playerTurn) {
+          case 'up':
+            if(gameData.playerPosition.y - 1 === mapBoundTiles.up) {
+              functions = functions.concat(parseBlocksToFuncions(block.code, gameData, mapBoundTiles));
+            }
+            break;
+          case 'right':
+            if(gameData.playerPosition.x + 1 === mapBoundTiles.right) {
+              functions = functions.concat(parseBlocksToFuncions(block.code, gameData, mapBoundTiles));
+            }
+            break;
+          case 'down':
+            if(gameData.playerPosition.y + 1 === mapBoundTiles.down) {
+              functions = functions.concat(parseBlocksToFuncions(block.code, gameData, mapBoundTiles));
+            }
+            break;
+          case 'left':
+            if(gameData.playerPosition.x - 1 === mapBoundTiles.left) {
+              functions = functions.concat(parseBlocksToFuncions(block.code, gameData, mapBoundTiles));
+            }
+            break;
+        }
+    }
+    return functions;
+  }
+
+  function _parseCLoop(gameData, block, mapBoundTiles) {
+    var functions = [];
+    switch(block.condition.name) {
+      case "notCollected":
+        //bo to sens życia
+        var maxReps = 42;
+        var rep = 0;
+        while(!(gameData.playerPosition.x === gameData.coinPosition.x && gameData.playerPosition.y === gameData.coinPosition.y) && rep <= maxReps) {
+          functions = functions.concat(parseBlocksToFuncions(block.code, gameData, mapBoundTiles));
+          rep++;
+        }
+        break;
+    }
     return functions;
   }
 

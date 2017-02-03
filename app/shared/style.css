@@ -13,7 +13,7 @@
 }
 
 .angular-ui-tree-placeholder:after {
-  content: "Upusc tutaj!";
+  content: "Upuść tutaj!";
   position: absolute;
   top: 50%;
   left: 4px;
