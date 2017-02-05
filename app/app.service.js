@@ -80,10 +80,11 @@ function AppService() {
           y: 5
         }
       },
-      levelInfo: "<p>Aplikacja, ktorej wlasnie uzywasz ma na celu nauke programowania w oparciu o <strong>bloki</strong>. "
-      + "Zacznijmy od prostego przykladu. Zlap blok funkcji przytrzymujac na nim lewy przycisk myszy, a nastepnie przeciagnij go do panelu po prawej stronie."
-      + "Powtorz te czynnosc dwa razy i wciśnij przycisk Rozpocznij! aby wykonac swoj program.</p>"
-      + "<p>Po zakonczeniu wykonywania wszystkich blokow kodu otrzymac okno z informacja o rezultacie.</p>"
+      levelInfo: "<p>Aplikacja, której własnie używasz ma na celu naukę programowania w oparciu o <strong>bloki</strong>.</p>"
+      + "<p>Zacznijmy od prostego przykładu:</br>"
+      + "<i>Złap blok funkcji przytrzymując na nim lewy przycisk myszy, a następnie przeciagnij go do panelu po prawej stronie.</i></p>"
+      + "<p>Powtórz te czynność dwa razy i wciśnij przycisk Rozpocznij! aby wykonać swój program.</p>"
+      + "<p>Po zakończeniu wykonywania wszystkich bloków kodu otrzymasz okno z informacją o rezultacie.</p>"
     },
     {
       blocks: [
@@ -104,11 +105,11 @@ function AppService() {
       },
       levelInfo: "<p>W kolejnej lekcji masz do dyspozycji trzy bloki odpowiadające trzem funkcjom.</p>"
       + "<p><strong>Funkcja</strong> to wydzielona część programu wykonująca jakieś operacje. Funkcje stosuje się, aby uprościć program główny i zwiększyć czytelność kodu.</p>"
-      + "<p>Nasze funkcje wykonują pojedyncze operacje jak obiekcie ktorym sterujemy (samochodem):"
-      + "<ul><li><strong>Jedz prosto</strong> - porusza obiektem do przodu o jedną kratę w stronę w ktora jest zwrocony</li>"
-      + "<li><strong>Skrec w lewo</strong> - obraca obiekt w lewo o 90 stopni</li>"
-      + "<li><strong>Skrec w prawo</strong> - obraca obiekt w prawo o 90 stopni</li></ul></p>"
-      + "<p>Funkcja z zalozenia powinna miec jak najmniejsza odpowiedzialnosc, dlatego w naszym przypadku kazda z funkcji wykonuje tylko pojedyncza operacje na obiekcie.</p>"
+      + "<p>Nasze funkcje wykonują pojedyncze operacje na obiekcie którym sterujemy (samochód):"
+      + "<ul><li><strong>Jedź prosto</strong> - porusza obiektem do przodu o jedną kratkę w stronę w która jest aktualnie zwrócony</li>"
+      + "<li><strong>Skręć w lewo</strong> - obraca obiekt w lewo o 90 stopni</li>"
+      + "<li><strong>Skręć w prawo</strong> - obraca obiekt w prawo o 90 stopni</li></ul></p>"
+      + "<p>Funkcja z zalożenia powinna mieć jak najmniejszą odpowiedzialnosc, dlatego w naszym przypadku kazda z funkcja wykonuje tylko pojedyńcza operację na obiekcie.</p>"
     },
     {
       blocks: [
@@ -130,6 +131,8 @@ function AppService() {
       + "<p>Żeby zapobiedz wielokrotnemu wywoływaniu tych samych funkcji wprowadzimy teraz pojęcie pętli.</p>"
       + "<p><strong>Pętla</strong> jest konstrukcją umożliwiającą powtarzalne wykonanie ciągu instrukcji określoną liczbę razy, lub do momentu zajścia pewnych warunków</p>"
       + "<p>W tej lekcji skupimy się na <strong>pętli iteracyjnej</strong>, której używamy, gdy z góry wiemy ile razy chcemy powtórzyć wykonanie określonego ciągu instrukcji</p>"
+      + "<p><i>Żeby dodać instrukcję do pętli przenieś blok pętli do panelu po prawej stronie, a następnie przenieś blok funkcji na blok pętli i umieść w wybranym miejscu.</i></p>"
+      + "<p><i>Wcięcia przed funkcjami oznaczają, że są wewnątrz pętli</i></p>"
     },
     {
       blocks: [

@@ -8,3 +8,7 @@
   border: rgb(35, 200, 99) inset 6px;
   border-radius: 3px;
 }
+
+.angular-ui-tree-handle * {
+  cursor: move;
+}

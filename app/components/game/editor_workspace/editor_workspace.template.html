@@ -1,5 +1,5 @@
 <script type="text/ng-template" id="blocks_renderer.html">
-    <code-block block="block" ng-click="$ctrl.removeBlock(this)"></code-block>
+  <code-block block="block" ng-click="$ctrl.removeBlock(this)"></code-block>
   <ol ui-tree-nodes="" ng-model="block.code">
     <li ng-repeat="block in block.code" ui-tree-node ng-include="'blocks_renderer.html'"></li>
   </ol>
