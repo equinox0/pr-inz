@@ -44,27 +44,27 @@ function AppService() {
   ];
 
   var _levels = [
-    {
-      blocks: [
-        _blocks[0],
-        _blocks[1],
-        _blocks[2],
-        _blocks[3],
-        _blocks[4],
-        _blocks[5],
-      ],
-      visualisationData: {
-        playerPosition: {
-          x: 3,
-          y: 5
-        },
-        playerTurn: 'right',
-        coinPosition: {
-          x: 5,
-          y: 5
-        }
-      }
-    },
+    // {
+    //   blocks: [
+    //     _blocks[0],
+    //     _blocks[1],
+    //     _blocks[2],
+    //     _blocks[3],
+    //     _blocks[4],
+    //     _blocks[5],
+    //   ],
+    //   visualisationData: {
+    //     playerPosition: {
+    //       x: 3,
+    //       y: 5
+    //     },
+    //     playerTurn: 'right',
+    //     coinPosition: {
+    //       x: 5,
+    //       y: 5
+    //     }
+    //   }
+    // },
     {
       blocks: [
         _blocks[0],
