@@ -1,0 +1,44 @@
+{
+  "1": {
+    "id": 1,
+    "type": "function",
+    "name": "goStraight",
+    "label": "Idź prosto"
+  },
+  "2": {
+    "id": 2,
+    "type": "function",
+    "name": "turnRight",
+    "label": "Skręc w prawo"
+  },
+  "3": {
+    "id": 3,
+    "type": "function",
+    "name": "turnLeft",
+    "label": "Skręc w lewo"
+  },
+  "4": {
+    "id": 4,
+    "type": "iLoop",
+    "number": null,
+    "code": []
+  },
+  "5": {
+    "id": 5,
+    "type": "cLoop",
+    "condition": {
+      "name": "notCollected",
+      "label": "Nie zebrano monety"
+    },
+    "code": []
+  },
+  "6": {
+    "id": 6,
+    "type": "condition",
+    "condition": {
+      "name": "obstacle",
+      "label": "Przeszkoda"
+    },
+    "code": []
+  }
+}

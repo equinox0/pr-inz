@@ -6,8 +6,9 @@
   background-color: rgb(159, 166, 162);
   border: rgb(159, 166, 162) inset 6px;
   border-radius: 3px;
+  margin-bottom: 10px;
 }
 
 .visualisation-button {
-  margin-top: 10px;
+  margin-bottom: 10px;
 }

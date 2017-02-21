@@ -1,13 +1,21 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-xs-12 col-sm-4">
-      <visualisation init-data="$ctrl.currentLevelData.visualisationData"></visualistion>
+    <div class="col-xs-12 col-sm-5">
+      <div class="row">
+        <div class="col-xs-12">
+          <visualisation init-data="$ctrl.currentLevelData.visualisationData"></visualistion>
+        </div>
+      </div>
     </div>
-    <div class="col-xs-6 col-sm-3">
-      <command-kit blocks="$ctrl.currentLevelData.blocks"></command-kit>
-    </div>
-    <div class="col-xs-6 col-sm-5">
-      <editor-workspace></editor-workspace>
+    <div class="col-xs-12 col-sm-7">
+      <div class="row">
+        <div class="col-xs-5">
+          <command-kit blocks="$ctrl.currentLevelData.blocks"></command-kit>
+        </div>
+        <div class="col-xs-7">
+          <editor-workspace></editor-workspace>
+        </div>
+      </div>
     </div>
   </div>
 </div>

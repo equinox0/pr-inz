@@ -1,3 +1,11 @@
-<navbar></navbar>
+<div ng-if="$ctrl.isLoaded">
+  <navbar></navbar>
 
-<div ui-view></div>
+  <div ui-view></div>
+</div>
+
+<div ng-if="$ctrl.isError" class="container-fluid">
+  <h1>Wystąpił błąd</h1>
+  <p>W trakcie uruchamiania aplikacji wystąpił błąd.</p>
+  <p>Proszę odświeżyć stronę lub spróbować ponownie później.</p>
+</div>
